@@ -6,7 +6,8 @@ const activeButtonElement = document.getElementById('active-task-button');
 const completedButtonElement = document.getElementById('completed-task-button');
 const clearButtonElement = document.getElementById('clear-task-button');
             
-            
+const LS = localStorage;
+
 let allTask = []
 
 let filterActive = 'All';
@@ -35,6 +36,13 @@ const getFilteredTask = () => {
     if (filterActive === 'All') return [...allTask];
     if (filterActive === 'Active') return allTask.filter(task => !task.completed);
     if (filterActive === 'Completed') return allTask.filter(task => task.completed);
+}
+
+// almacenamiento*
+
+const setTaskInLocalStorage = () => {
+    const jsonTask = JSON.stringify(allTask);
+    LS.setItem('tasks', jsonTask);
 }
             
 // pintar las tareas en el DOM: bucle y fragmento para pintar las tareas añadidas en el DOM
@@ -73,6 +81,19 @@ const renderTask = () => {
     listElement.innerHTML = '';
     listElement.append(fragmentTask);
     countTaskLeft();
+    setTaskInLocalStorage();
+}
+
+// almacenamiento local
+
+const getTaskFromLocalStorage = () => {
+    const task = LS.getItem('tasks');
+    countTaskLeft();
+    if (!task) return;
+
+    const localStorageTask = JSON.parse(task);
+    allTask = localStorageTask;
+    renderTask();
 }
 
             
@@ -114,6 +135,7 @@ const completedTask = (id) => {
 }
 
 
+getTaskFromLocalStorage();
 countTaskLeft();    
 
 // botones del filtro:
@@ -140,4 +162,5 @@ inputElement.addEventListener('keydown', (event) => {
     }
 })
 
-clearButtonElement.addEventListener('click', deleteAllCompletedTask)
+clearButtonElement.addEventListener('click', deleteAllCompletedTask);
+
