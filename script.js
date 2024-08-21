@@ -7,7 +7,7 @@ const completedButtonElement = document.getElementById('completed-task-button');
 const clearButtonElement = document.getElementById('clear-task-button');
             
             
-const allTask = [
+let allTask = [
     {
     id: Date.now(), // referencia de id para que localice en función del momento de publicación
     taskName: 'Make a todo app',
@@ -15,24 +15,41 @@ const allTask = [
     }
 ]
             
-// renderización: bucle y fragmento para pintar las tareas añadidas en el DOM
+// pintar las tareas en el DOM: bucle y fragmento para pintar las tareas añadidas en el DOM
 const renderTask = () => {
     const fragmentTask = document.createDocumentFragment();
             
     allTask.forEach(task => {
-        const newCheckbox = document.createElement('button');
-        newCheckbox.textContent = 'X';
-        const newLi = document.createElement('li');
-        newLi.textContent = task.taskName;
-        newLi.id = task.id;
-        newLi.append(newCheckbox);
-        fragmentTask.append(newLi);
+        const newDiv = document.createElement('div');
+
+        const newCheckbox = document.createElement('input');
+        newCheckbox.type = 'checkbox';
+        newCheckbox.id = task.id;
+        newCheckbox.checked = task.completed;
+        newCheckbox.dataset.id = task.id;
+
+        const newLabel = document.createElement('label');
+        newLabel.htmlFor = task.id;
+        newLabel.textContent = task.taskName;
+
+        const newButtonDelete = document.createElement('button');
+        newButtonDelete.textContent = 'X';
+
+        //botón para eliminar tareas:
+        newButtonDelete.addEventListener('click', () => deleteTask(task.id));
+
+        // para completar:
+        newCheckbox.addEventListener('change', () => completedTask(task.id))
+
+        newDiv.append(newCheckbox, newLabel, newButtonDelete);
+        fragmentTask.append(newDiv);
         }   
     )
             
     listElement.innerHTML = '';
     listElement.append(fragmentTask);
 }
+
             
 // añadir tareas: check, lo añade al objeto y luego llama a la función para renderizar
 const addTask = (event) => {
@@ -42,15 +59,36 @@ const addTask = (event) => {
         completed: false
     }
     allTask.push(newTask);
-    renderTask()
+    renderTask(allTask);
+    event.target.value = '';
+}
+
+// función para borrar tareas
+
+const deleteTask = (id) => {
+    const updatedTask = allTask.filter(task => task.id !== id);
+    allTask = updatedTask;
+    renderTask();
+}
+
+// completar tareas
+
+const completedTask = (id) => {
+    allTask.forEach(task => {
+        if (task.id === id) {
+            task.completed = !task.completed;
+        }
+        return task;
+    })
+    renderTask();
 }
             
-// en construcción: selección de tareas, filtros, removeAll y mostrar las que quedan.
-  
+
+
+
 inputElement.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         event.preventDefault();
         addTask(event);
-        console.log(allTask)
     }
 })
