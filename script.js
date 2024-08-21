@@ -7,19 +7,43 @@ const completedButtonElement = document.getElementById('completed-task-button');
 const clearButtonElement = document.getElementById('clear-task-button');
             
             
-let allTask = [
-    {
-    id: Date.now(), // referencia de id para que localice en función del momento de publicación
-    taskName: 'Make a todo app',
-    completed: false
+let allTask = []
+
+let filterActive = 'All';
+
+//función para contar las tareas que quedan sin completar
+const countTaskLeft = () => {
+    console.log(allTask.length)
+    if (allTask.length === 0) {
+        taskLefttElement.textContent = 'No tasks';
+        return;
     }
-]
+
+    const itemsLeft = allTask.filter(task => !task.completed).length;
+
+    if (itemsLeft ==0 ) {
+        taskLefttElement.textContent = 'All task completed';
+    } else {
+        taskLefttElement.textContent = `${itemsLeft} items left`;
+    }
+
+}
+
+// filtrar tareas
+
+const getFilteredTask = () => {
+    if (filterActive === 'All') return [...allTask];
+    if (filterActive === 'Active') return allTask.filter(task => !task.completed);
+    if (filterActive === 'Completed') return allTask.filter(task => task.completed);
+}
             
 // pintar las tareas en el DOM: bucle y fragmento para pintar las tareas añadidas en el DOM
 const renderTask = () => {
     const fragmentTask = document.createDocumentFragment();
+
+    const filteredTask = getFilteredTask();
             
-    allTask.forEach(task => {
+    filteredTask.forEach(task => {
         const newDiv = document.createElement('div');
 
         const newCheckbox = document.createElement('input');
@@ -48,6 +72,7 @@ const renderTask = () => {
             
     listElement.innerHTML = '';
     listElement.append(fragmentTask);
+    countTaskLeft();
 }
 
             
@@ -71,6 +96,11 @@ const deleteTask = (id) => {
     renderTask();
 }
 
+const deleteAllCompletedTask = () => {
+    allTask = allTask.filter(task => !task.completed);
+    renderTask()
+}
+
 // completar tareas
 
 const completedTask = (id) => {
@@ -82,9 +112,26 @@ const completedTask = (id) => {
     })
     renderTask();
 }
-            
 
 
+countTaskLeft();    
+
+// botones del filtro:
+
+allButtonElement.addEventListener('click', () => {
+    filterActive = 'All';
+    renderTask();
+});
+
+activeButtonElement.addEventListener('click', () => {
+    filterActive = 'Active';
+    renderTask();
+});
+
+completedButtonElement.addEventListener('click', () => {
+    filterActive = 'Completed';
+    renderTask();
+});
 
 inputElement.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
@@ -92,3 +139,5 @@ inputElement.addEventListener('keydown', (event) => {
         addTask(event);
     }
 })
+
+clearButtonElement.addEventListener('click', deleteAllCompletedTask)
