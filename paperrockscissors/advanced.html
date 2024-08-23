@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Vite App</title>
+  </head>
+  <body data-mode="advanced">
+    <header>
+      <h1>Paper, rock, scissor, lizard, spock</h1>
+      <div>
+        <span>YOU: </span>
+        <span id="user-points">0</span>
+      </div>
+      <div>
+        <span>PC: </span>
+        <span id="pc-points">0</span>
+      </div>
+    </header>
+    <main id="game-options">
+      <button data-item="rock">Rock</button>
+      <button data-item="paper">Paper</button>
+      <button data-item="scissor">Scissor</button>
+      <button data-item="lizzard">Lizard</button>
+      <button data-item="spock">Spock</button>
+    </main>
+    <div>
+      <div>
+        <span>User move: </span>
+        <span id="user-move"></span>
+      </div>
+      <div>
+        <span>Pc move: </span>
+        <span id="pc-move"></span>
+      </div>
+      <h2 id="result">Result</h2>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
