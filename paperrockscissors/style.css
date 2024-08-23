@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --background-color: white;
+  --x: 0px;
+  --y: 0px;
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.div-move {
+  background-color: beige;
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+}

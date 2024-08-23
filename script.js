@@ -5,6 +5,42 @@ const allButtonElement = document.getElementById('all-task-button');
 const activeButtonElement = document.getElementById('active-task-button');
 const completedButtonElement = document.getElementById('completed-task-button');
 const clearButtonElement = document.getElementById('clear-task-button');
+const digitalHourContainer = document.getElementById('digital-hour');
+
+const date = new Date();
+
+let hours = date.getHours();
+console.log(hours)
+if (hours < 10) {hours = `0${date.getHours()}`}
+let minutes = date.getMinutes();
+if (minutes < 10) {minutes = `0${date.getMinutes()}`}
+const year = date.getFullYear();
+const monthObject = [
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'dicember'
+]
+const month = date.getMonth();
+const dayObject = [
+    'Sunday',
+    'Monday',
+    'Thursday',
+    'Wednesday',
+    'Tuesday',
+    'Friday',
+    'Saturday'
+]
+const day = date.getDay();
+const dayOfMonth = date.getDate();
             
 const LS = localStorage;
 
@@ -161,6 +197,20 @@ inputElement.addEventListener('keydown', (event) => {
         addTask(event);
     }
 })
+
+// la hora del header:
+
+const printDigitalHour = () => {
+    const hoursAndMinutes = document.createElement('div');
+    const dateComplete = document.createElement('div');
+
+    hoursAndMinutes.textContent = `${hours}: ${minutes}`;
+    dateComplete.textContent = `${dayObject[day]} ${dayOfMonth} ${monthObject[month]} ${year}`;
+
+    digitalHourContainer.append(hoursAndMinutes, dateComplete);
+}
+
+printDigitalHour();
 
 clearButtonElement.addEventListener('click', deleteAllCompletedTask);
 

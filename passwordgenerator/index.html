@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>password generator</title>
+</head>
+<body>
+    <h1>GENERADOR DE CONTRASEÑA</h1>
+      <h3 id="password-camp">P4$5W0RD!</h3>
+      <h4 id="length-text">Length: introduzca</h4>
+      <div id="options">
+        <div>
+          <span>4</span>
+          <input type="range" min="4" max="32" id="input-range" step="1">
+          <span>32</span>
+        </div>
+        <div>
+          <label for="uppercase-input">Include Uppercase</label>
+          <input type="checkbox" id="uppercase-input" />
+        </div>
+        <div>
+          <label for="lowercase-input">Include lowercase</label>
+          <input type="checkbox" id="lowercase-input" />
+        </div>
+        <div>
+          <label for="numbers-input">Include numbers</label>
+          <input type="checkbox" id="numbers-input" />
+        </div>
+        <div>
+          <label for="symbols-input">Include symbols</label>
+          <input type="checkbox" id="symbols-input" />
+        </div>
+        <button id="button-password" >GENERATE PASSWORD</button>
+      </div>
+    <script src="script.js"></script>
+    
+</body>
+</html>
