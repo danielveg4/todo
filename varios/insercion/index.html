@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="button-li">Añadir elemento</button>
+    <ul id="ul-list">
+      <!-- Cada vez que pulses el botón deberá añadirse un li con un button dentro -->
+      <li>Elemento 1 <button>X</button></li>
+    </ul> 
+
+    <button id="button-elements">Añadir Elementos</button>
+        <ul id="list-elements">
+            <li>Item 1</li>
+            <li>Item 2</li>
+        </ul>
+        <div id="button-container">
+        </div>
+    <div>
+        <label id="label-heading">Pulsa el botón para seleccionar</label>
+        <input id="input-heading" type="range" min="1" max="6" step="1" value="1" />
+        <button id="button-heading">Generar Encabezado</button>
+    </div>
+    <!-- Div para encabezados -->
+    <div id="headings"></div>
+    <div id="buttons-container">
+      <button>Botón 1</button>
+      <button>Botón 2</button>
+      <button>Botón 3</button>
+      <button>Botón 4</button>
+      <button>Botón 5</button>
+      <button>Botón 6</button>
+      <button>Botón 7</button>
+      <button>Botón 8</button>
+      <button>Botón 9</button>
+      <button>Botón 10</button>
+    </div>
+    <div id="cards-container"></div>
+    <button id="button-cards">Insertar tarjetas</button>
+    <label>Introduce un número</label>
+    <input id="input-table" type="number" />
+    <button id="button-table" disabled>Imprimir tabla de multiplicar</button>
+    <ul id="list-table"></ul>
+    <h1>Posts</h1>
+    <form>
+      <div>
+        <label>Title</label>
+        <input id="input-title" type="text" />
+      </div>
+      <div>
+        <label>Author</label>
+        <input id="input-author" type="text" />
+      </div>
+      <div>
+        <label>Message:</label>
+        <textarea id="textarea-message"></textarea>
+      </div>
+      <button id="button-send-post">Send Post</button>
+    </form>
+    <div id="new-posts"></div>
+    <div id="div-container">Container</div>
+    <ul id="odd-numbers">Impares</ul>
+    <ul id="even-numbers">Pares</ul>
+    <script src="script.js"></script>
+</body>
+</html>
